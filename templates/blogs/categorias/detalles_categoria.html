@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>{{ entrada.titulo}}</title>
+{% endblock %}
+
+{% block header %}  
+
+{% endblock %}
+
+{% block contenido %}
+
+<h1>{{ entrada.titulo }}</h1>
+
+<div>
+    <img src="{{ entrada.imagen.url }}" alt="imagen de la entrada">
+</div>
+
+<p>{{ entrada.contenido }}</p>
+
+<div>
+    <p>Publicado por: {{ entrada.autor }}</p>
+    <p>Fecha de publicación: {{ entrada.fecha_creacion }}</p>
+    <p> Categorías: 
+        {% for categoria in entrada.categoria.all %}
+            {{categoria.nombre}}, 
+         {% endfor %}
+    </p>
+</div> 
+        
+{% endblock %}

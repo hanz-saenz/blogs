@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Editar entrada {{ entrada.titulo}}</title>
+{% endblock %}
+
+{% block header %}  
+
+{% endblock %}
+
+{% block contenido %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+
+        
+{% endblock %}

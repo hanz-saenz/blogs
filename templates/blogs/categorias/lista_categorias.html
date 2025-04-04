@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Lista Categorias</title>
+{% endblock %}
+
+{% block header %}  
+
+{% endblock %}
+
+{% block contenido %}
+
+
+    <a href="{% url 'crear_categoria' %}">Crear Categoria</a>
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <th scope="row">{{categoria.id}}</th>
+                    <td>{{categoria.nombre}}</td>
+                    <td>
+                        <a href="{% url 'editar_categoria' categoria.id %}">Editar</a>
+                        <br>
+                        <a href="{% url 'eliminar_categoria' categoria.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+         
+        </tbody>
+      </table>
+
+   </div>
+        
+{% endblock %}

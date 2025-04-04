@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Lista Entradas</title>
+{% endblock %}
+
+{% block header %}  
+
+{% endblock %}
+
+{% block contenido %}
+
+<!-- Filtros por una categoría -->
+<div>
+    <ul>
+      <li><a href="?categoria=0">Todas las categorías</a></li>
+      {% for categoria in categorias %}
+        <li><a href="?categoria={{categoria.id}}">{{categoria.nombre}}</a></li>
+      {% endfor %}
+    </ul>
+   </div>
+
+   <!-- filtro por varias categorías -->
+
+   <div>
+    <form action="" method="get">
+      
+      {% for categoria in categorias %}
+
+        <input type="checkbox" name="categoria" value="{{categoria.id}}" id="categoria-{{categoria.id}}">
+        <label for="categoria-{{categoria.id}}" >{{categoria.nombre}}</label>
+
+      {% endfor %}
+
+      <button type="submit">Filtrar</button>
+    </form>  
+
+    <a href="{% url 'lista_categorias' %}">Ver Categorías</a>
+
+    <a href="{% url 'crear_entrada' %}">Crear Entrada</a>
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for entrada in entradas %}
+                <tr>
+                    <th scope="row">{{entrada.id}}</th>
+                    <td>{{entrada.titulo}}</td>
+                    <td>{{entrada.fecha_creacion}}</td>
+                    <td>
+                        <a href="{% url 'editar_entrada' entrada.id %}">Editar</a>
+                        <br>
+                        <a href="{% url 'eliminar_entrada' entrada.id %}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+         
+        </tbody>
+      </table>
+
+   </div>
+        
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Inicio</title>
+{% endblock %}
+
+{% block header %}  
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block contenido %}
+        <!-- Filtros por una categoría -->
+         <div>
+          <ul>
+            <li><a href="?categoria=0">Todas las categorías</a></li>
+            {% for categoria in categorias %}
+              <li><a href="?categoria={{categoria.id}}">{{categoria.nombre}}</a></li>
+            {% endfor %}
+          </ul>
+         </div>
+
+         <!-- filtro por varias categorías -->
+
+         <div>
+          <form action="" method="get">
+            
+            {% for categoria in categorias %}
+
+              <input type="checkbox" name="categoria" value="{{categoria.id}}" id="categoria-{{categoria.id}}">
+              <label for="categoria-{{categoria.id}}" >{{categoria.nombre}}</label>
+
+            {% endfor %}
+
+            <button type="submit">Filtrar</button>
+          </form>  
+
+         </div>
+
+
+         <!-- filtro con selet2 -->
+
+         <div>
+          <form action="" method="get">
+            <select class="js-example-basic-multiple" name="categoria" multiple="multiple">
+              {% for categoria in categorias %}
+
+              <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+              {% endfor %}
+
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+          </form>
+         </div>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for entrada in entradas %}
+            <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{entrada.imagen.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{entrada.titulo}}</h5>
+              <p class="card-text">{{entrada.contenido}}</p>
+              <a href="{% url 'detalles_entrada' entrada.slug %}" class="btn btn-primary" target="_blank">Ver más</a>
+            </div>
+          </div>
+
+        {% endfor %}
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+      <script>
+        $(document).ready(function() {
+          $('.js-example-basic-multiple').select2();
+        });
+      </script>
+{% endblock %}
