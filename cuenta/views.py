@@ -84,13 +84,12 @@ def editar_perfil(request):
         if request.method == 'PUT':
             data = request.data
 
-            if 'descripcion' in data:
+            if 'descripcion' in data and data['descripcion'] != perfil.descripcion:
                 perfil.descripcion = data['descripcion']
 
             if 'es_autor' in data:
                 valor = str(data['es_autor']).lower()
-                perfil.es_autor = valor == 'true'
-
+                perfil.es_autor = True if valor == 'true' else False
             if 'avatar' in request.FILES:
                 perfil.avatar = request.FILES['avatar']
 

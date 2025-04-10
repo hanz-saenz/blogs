@@ -193,6 +193,7 @@ class EntradaApiView(APIView):
 
         entrada = Entrada(titulo=titulo, contenido=contenido, autor_id=autor, imagen=imagen)
         entrada.save()
+        
 
         id_categorias = categorias.split(',')
              
